@@ -1,0 +1,4 @@
+[docomo]
+api_key = 5956584575756f38646c4a6b486e55505130792e514f4a35394e395634636f7a3369596469347252655041 
+client_id = wwgZ4utv8BhC86QV7dW6tNRzROkQHNtub4utGTIejxZf 
+client_secret = A6kev^m! PE~M.}wmR_g 
