@@ -4,14 +4,24 @@ import configparser
 
 class ConversationHandle(object):
 	
-    def __init__(self):
+    #def __init__(self):
 
     # jsonパラメータを作成    
     def makeParamJson(self,param):
         jsonStr = json.dumps(param)
         return jsonStr
 
-    def sendJsonRequest(self,url,jsonStr):
+    # jsonを送信する
+    def sendJsonRequest(self,url,jsonData):
+        method = "POST"
+        headers = {"Content-Type" : "application/json"}
+
+    	# httpリクエストを準備してPOST
+        request = urllib.request.Request(url, data=jsonData, method=method, headers=headers)
+        with urllib.request.urlopen(request) as response:
+            response_body = response.read().decode("utf-8")
+
+        return response_body 
 
     # リクエストを送信する
     def sendGetRequest(self,url,param):
