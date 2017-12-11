@@ -8,14 +8,15 @@ class ConversationHandle(object):
 
     # jsonパラメータを作成    
     def makeParamJson(self,param):
-        jsonStr = json.dumps(param)
+        jsonStr = json.dumps(param).encode("utf-8")
         return jsonStr
 
     # jsonを送信する
     def sendJsonRequest(self,url,jsonData):
         method = "POST"
         headers = {"Content-Type" : "application/json"}
-
+        print(url)
+        print(jsonData)
     	# httpリクエストを準備してPOST
         request = urllib.request.Request(url, data=jsonData, method=method, headers=headers)
         with urllib.request.urlopen(request) as response:
