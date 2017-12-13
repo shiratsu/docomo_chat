@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
-from lib.conversationHandle import ConversationHandle
+from lib.testConversationHandle import TestConversationHandle
 from config.config import Config
+import json
 
 if __name__ == '__main__':
     
     config = Config()
-    convHandle = ConversationHandle()
+    convHandle = TestConversationHandle()
 
-    print('S: こんにちは！お名前とお電話番号を教えてください。')
+    print('S: こんにちは！お名前を教えてください。')
     while True:
         # input from User
         sent = input('U: ')
@@ -15,19 +16,12 @@ if __name__ == '__main__':
             print('S: どういたしまして')
             break
 
-        # configから設定を取得
-        urlBase = config.read('docomo','url') 
-        apiKey = config.read('docomo','api_key') 
-        
-        # urlを設定
-        url = urlBase+apiKey
+        convHandle.sentenceAnalysis(sent)
 
-	# パラメータを作成
-        param = {"sentence" : sent,"info_filter" : "form"}
-        objJson = convHandle.makeParamJson(param) 
+        resultObjs = json.loads(responseBody.split('\n')[0])
 
-	# 送信
-        responseBody = convHandle.sendJsonRequest(url,objJson)
-	
-        print(responseBody)
+        for resultObj in resultObjs["ne_list"]:
+            print(resultObj)
+
+        break
 
