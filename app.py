@@ -1,12 +1,9 @@
 # -*- coding: utf-8 -*-
-from lib.testConversationHandle import TestConversationHandle
-from config.config import Config
-import json
+from lib.testConversationAnalysis import TestConversationAnalysis
 
 if __name__ == '__main__':
     
-    config = Config()
-    convHandle = TestConversationHandle()
+    convObj = TestConversationAnalysis()
 
     print('S: こんにちは！お名前を教えてください。')
     while True:
@@ -16,12 +13,12 @@ if __name__ == '__main__':
             print('S: どういたしまして')
             break
 
-        convHandle.sentenceAnalysis(sent)
+        analysisResult = convObj.sentenceAnalysis(sent)
 
-        resultObjs = json.loads(responseBody.split('\n')[0])
+        #resultObjs = json.loads(responseBody.split('\n')[0])
 
-        for resultObj in resultObjs["ne_list"]:
-            print(resultObj)
+        #for resultObj in resultObjs["ne_list"]:
+        #    print(resultObj)
 
-        break
+        #break
 

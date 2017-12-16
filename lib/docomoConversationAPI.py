@@ -2,7 +2,7 @@
 import urllib.request, json
 import configparser
 
-class ConversationHandle(object):
+class DocomoConversationAPI(object):
 	
     #def __init__(self):
 
