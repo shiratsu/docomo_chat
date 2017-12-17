@@ -27,3 +27,12 @@ class TestConversationAnalysis(ConversationAnalysis):
         # パラメータを作成
         param = {"sentence" : sent,"info_filter" : "form"}
         objJson = convHandle.makeParamJson(param)
+
+        responseBody = convHandle.sendJsonRequest(url,objJson)
+       
+    # jsonレスポンス解析
+    def checkJsonResponse(self,objJson):
+
+        resultObjs = json.loads(responseBody.split('\n')[0])
+        for resultObj in resultObjs["ne_list"]:
+             print(resultObj)

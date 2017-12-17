@@ -13,6 +13,10 @@ if __name__ == '__main__':
             print('S: どういたしまして')
             break
 
+        #URLを初期化しておく
+        convObj.makeSentenceAnalysisUrl()
+
+        # sentence解析
         analysisResult = convObj.sentenceAnalysis(sent)
 
         #resultObjs = json.loads(responseBody.split('\n')[0])
