@@ -17,12 +17,6 @@ if __name__ == '__main__':
         convObj.makeSentenceAnalysisUrl()
 
         # sentence解析
-        analysisResult = convObj.sentenceAnalysis(sent)
+        analysisResult = convObj.sentenceAnalysis(sent,'PSN')
 
-        #resultObjs = json.loads(responseBody.split('\n')[0])
-
-        #for resultObj in resultObjs["ne_list"]:
-        #    print(resultObj)
-
-        #break
 
