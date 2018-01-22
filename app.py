@@ -4,7 +4,7 @@ from lib.testConversationAnalysis import TestConversationAnalysis
 if __name__ == '__main__':
     
     convObj = TestConversationAnalysis()
-
+    
     print('S: こんにちは！お名前を教えてください。')
     while True:
         # input from User
