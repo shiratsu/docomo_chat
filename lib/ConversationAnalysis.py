@@ -48,6 +48,21 @@ class ConversationAnalysis(metaclass=ABCMeta):
         strPattern = '[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]+'
         objRe = re.compile(strPattern)
         return objRe.match(sent)
+    
+    # 電話番号を取得
+    # 電話番号は複数パターンある
+    def getPhoneNumber(self,sent):
+        aryReturn = []
+        
+        strPattern1 = '^\d{10}$|^\d{11}$'
+        objRe1 = re.compile(strPattern1)
+        aryReturn = objRe1.match(sent)
+        
+        strPattern2 = '^\d{2,4}-\d{2,4}-\d{4}$'
+        objRe2 = re.compile(strPattern2)
+        aryReturn = objRe2.match(sent)
+        
+        return aryReturn
 
     @abstractmethod
     def getLocate(self,sent):
