@@ -16,17 +16,20 @@ class ConversationAnalysis(metaclass=ABCMeta):
         pass
 
     # 文章から人名を取得(mecabで解析して取得する。)
+    # katakanaで入れられた場合は、今のところ判定不可
     def getPerson(self,sent):
-        node = self.mecab.parseToNode(sent)
+        node = self.mecab.parse(sent)
         aryName = []
-        while node:
+        for chunk in node.splitlines()[:-1]:
+            (surface, feature) = chunk.split('\t')
             #品詞を取得
-            pos1 = node.feature.split(",")[1]
-            pos2 = node.feature.split(",")[2]
-            pos3 = node.feature.split(",")[3]
-            if pos1 == '名詞' and pos2 == '固有名詞':
+            features = feature.split(",")
+            pos1 = features[0]
+            pos2 = features[1]
+            pos3 = features[2]
+            if pos1 == '名詞' and pos2 == '固有名詞' and pos3 == '人名':
                 #単語を取得
-                word = node.surface
+                word = surface
                 aryName.append(word)
             else:
                 continue
@@ -64,9 +67,28 @@ class ConversationAnalysis(metaclass=ABCMeta):
         
         return aryReturn
 
-    @abstractmethod
+    # 地名
+    # ベースは形態素解析で良い気がする
     def getLocate(self,sent):
-        pass
+        strLoc = ''
+        aryName = []
+        for chunk in node.splitlines()[:-1]:
+            (surface, feature) = chunk.split('\t')
+            #品詞を取得
+            features = feature.split(",")
+            pos1 = features[0]
+            pos2 = features[1]
+            pos3 = features[2]
+            if pos1 == '名詞' and pos2 == '固有名詞' and pos3 in [ '地域','一般','組織']:
+                #単語を取得
+                word = surface
+                aryName.append(word)
+            else:
+                continue
+            
+        strLoc = ''.join(str_list)
+
+        return strLoc
 
     @abstractmethod
     def getJobKind(self,sent):
